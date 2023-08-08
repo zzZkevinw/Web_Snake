@@ -23,7 +23,7 @@ function setBoardSize(size) {
     snakeXChange = BLOCK_SIZE;
     snakeYChange = 0;
     snakeBody = []; // 清空蛇的身体
-    draw(); // 重新绘制蛇和食物
+    //draw(); // 重新绘制蛇和食物
     drawGrid(); // 重新绘制网格线
 }
 
