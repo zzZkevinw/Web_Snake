@@ -1,0 +1,59 @@
+body {
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.speed-controls,
+.size-controls {
+    display: flex;
+    align-items: center;
+}
+
+.gameCanvas {
+    display: block;
+    margin: 0 auto;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.speed-controls label,
+.size-controls label {
+    margin-right: 5px;
+}
+
+.button-container {
+    display: flex; /* 设置为 flex 容器 */
+    justify-content: center; /* 水平居中对齐 */
+}
+
+#startBtn {
+    /* 这些是你的按钮样式 */
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* 其他样式保持不变 */

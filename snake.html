@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>贪吃蛇游戏</title>
+    <link rel="stylesheet" href="snake.css">
+</head>
+<body>
+    <div class="controls">
+        <div class="speed-controls">
+            <label>速度:</label>
+            <input type="radio" id="slow" name="speed" value="200">
+            <label for="slow">慢</label>
+            <input type="radio" id="medium" name="speed" value="150" checked>
+            <label for="medium">中</label>
+            <input type="radio" id="fast" name="speed" value="100">
+            <label for="fast">快</label>
+        </div>
+        <div class="button-container"> <!-- 添加此行 -->
+            <button id="startBtn">开始/重启游戏</button>
+        </div> <!-- 添加此行 -->
+        <div class="size-controls">
+            <label>棋盘大小:</label>
+            <input type="radio" id="small" name="size" value="200">
+            <label for="small">小</label>
+            <input type="radio" id="mediumSize" name="size" value="300" checked>
+            <label for="mediumSize">中</label>
+            <input type="radio" id="large" name="size" value="400">
+            <label for="large">大</label>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <canvas class="gameCanvas" id="gameCanvas" width="300" height="300"></canvas>
+    <script src="snake.js"></script>
+</body>
+</html>
