@@ -53,19 +53,19 @@ function draw() {
 }
 
 function drawGrid() {
-    ctx.strokeStyle = "#ccc";
-    for (let x = 0; x < canvas.width; x += BLOCK_SIZE) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
-        ctx.stroke();
-    }
-    for (let y = 0; y < canvas.height; y += BLOCK_SIZE) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-        ctx.stroke();
-    }
+    // ctx.strokeStyle = "#ccc";
+    // for (let x = 0; x < canvas.width; x += BLOCK_SIZE) {
+    //     ctx.beginPath();
+    //     ctx.moveTo(x, 0);
+    //     ctx.lineTo(x, canvas.height);
+    //     ctx.stroke();
+    // }
+    // for (let y = 0; y < canvas.height; y += BLOCK_SIZE) {
+    //     ctx.beginPath();
+    //     ctx.moveTo(0, y);
+    //     ctx.lineTo(canvas.width, y);
+    //     ctx.stroke();
+    // }
 
     // 绘制黑色外边框
     ctx.strokeStyle = "black";
@@ -142,4 +142,5 @@ document.getElementsByName('size').forEach(radio => {
 
 document.getElementById('startBtn').addEventListener('click', startGame);
 
+draw();
 drawGrid();
