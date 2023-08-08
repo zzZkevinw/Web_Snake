@@ -142,5 +142,4 @@ document.getElementsByName('size').forEach(radio => {
 
 document.getElementById('startBtn').addEventListener('click', startGame);
 
-draw();
 drawGrid();
