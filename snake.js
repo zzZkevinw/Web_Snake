@@ -80,8 +80,11 @@ function updateScore() {
 }
 
 function update() {
+    const totalBlocks = (canvas.width / BLOCK_SIZE) * (canvas.height / BLOCK_SIZE); // 计算屏幕上的总区块数
+
     snakeX += snakeXChange;
     snakeY += snakeYChange;
+
     if (snakeX === foodX && snakeY === foodY) {
         score += 10;
         updateScore(); // 更新分数
@@ -89,17 +92,29 @@ function update() {
     } else {
         snakeBody.pop();
     }
+
     snakeBody.unshift({ x: snakeX, y: snakeY });
+
+    // 检查是否胜利
+    if (snakeBody.length === totalBlocks) {
+        clearInterval(gameLoop);
+        alert("Congratulations! You win! Your Score: " + score);
+        document.getElementById('startBtn').disabled = false;
+        return;
+    }
+
     if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || checkCollision()) {
         clearInterval(gameLoop);
         alert("Game Over! Your Score: " + score);
         document.getElementById('startBtn').disabled = false;
         return;
     }
+
     draw();
     drawGrid();
     changeDirection = false; // 重置方向改变标记
 }
+
 
 function checkCollision() {
     for (let i = 1; i < snakeBody.length; i++) {
