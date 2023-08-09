@@ -21,16 +21,18 @@ body {
 }
 
 button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
+    font-size: 20px; /* 设置字体大小 */
+    font-weight: bold; /* 设置字体粗细 */
+    color: #000; /* 设置字体颜色 */
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0); /* 渐变背景色 */
+    padding: 5px; /* 设置内边距 */
+    border-radius: 5px; /* 设置边框圆角 */
+    text-align: center; /* 设置文本对齐方式 */
+    border: 2px solid #444; /* 边框 */
+    transition-duration: 0.4s; /* 设置过渡效果 */
+    cursor: pointer; /* 设置鼠标样式 */
+    margin: 0 10px; /* 设置按钮间距 */
+    width: 100px; /* 设置宽度 */
 }
 
 .speed-controls label,
@@ -43,17 +45,8 @@ button {
     justify-content: center; /* 水平居中对齐 */
 }
 
-#startBtn {
-    /* 这些是你的按钮样式 */
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
+button:hover {
+    background: linear-gradient(to right, #636060, #777676); /* 鼠标悬停时的渐变背景色 */
 }
 
 /* 其他样式保持不变 */
