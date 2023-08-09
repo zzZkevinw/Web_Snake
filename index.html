@@ -7,34 +7,53 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+    <button id="instructionsButton">游戏说明</button>
+    <div id="instructions" style="display: none;">
+        <p>1.初始状态: 游戏开始时，玩家控制一条小蛇，通常在屏幕中央。</p>
+        <p>2.移动: 玩家使用键盘上下左右箭头键来控制蛇的移动方向，蛇会不断地沿着当前方向移动。</p>
+        <p>3.食物: 游戏屏幕上会随机出现食物（红色），玩家的目标是控制蛇吃到这些食物。</p>
+        <p>4.吃食物后增长: 当蛇的头部与食物相撞时，蛇会吞下食物并变长，吃到食物通常会增加玩家的得分。</p>
+        <p>5.碰撞: 蛇不能撞到屏幕边缘或自己的身体，这样的碰撞会导致游戏结束。</p>
+        <p>6.速度: 游戏通常有不同的速度级别，蛇的移动速度会影响游戏的难度。</p>
+        <p>7.目标: 游戏的主要目标是获得尽可能高的分数,分数通常基于蛇吃到的食物数量，有时也可能与蛇的长度有关。</p>
+    </div>
     <div class="controls">
-        <div class="speed-controls">
-            <label>速度:</label>
-            <input type="radio" id="slow" name="speed" value="200">
-            <label for="slow">慢</label>
-            <input type="radio" id="medium" name="speed" value="150" checked>
-            <label for="medium">中</label>
-            <input type="radio" id="fast" name="speed" value="100">
-            <label for="fast">快</label>
-        </div>
         <div class="button-container"> <!-- 添加此行 -->
             <button id="startBtn">开始/重启游戏</button>
         </div> <!-- 添加此行 -->
-        <div class="size-controls">
-            <label>棋盘大小:</label>
-            <input type="radio" id="small" name="size" value="200">
-            <label for="small">小</label>
-            <input type="radio" id="mediumSize" name="size" value="300" checked>
-            <label for="mediumSize">中</label>
-            <input type="radio" id="large" name="size" value="400">
-            <label for="large">大</label>
-        </div>
     </div>
     <br>
+    <span class="sstyle">
+        <label>速度:</label>
+        <input type="radio" id="slow" name="speed" value="350">
+        <label for="slow">慢</label>
+        <input type="radio" id="medium" name="speed" value="250" checked>
+        <label for="medium">中</label>
+        <input type="radio" id="fast" name="speed" value="150">
+        <label for="fast">快</label>
+    </span> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="sstyle">
+        <label>大小:</label>
+        <input type="radio" id="small" name="size" value="200" checked>
+        <label for="small">小</label>
+        <input type="radio" id="mediumSize" name="size" value="300">
+        <label for="mediumSize">中</label>
+        <input type="radio" id="large" name="size" value="400">
+        <label for="large">大</label>
+    </span>
     <br>
+    <div id="scoreBoard" class = "sstyle">Score: 0</div>
     <br>
-    <br>
-    <canvas class="gameCanvas" id="gameCanvas" width="300" height="300"></canvas>
+    <canvas class="gameCanvas" id="gameCanvas" width="200" height="200"></canvas>
     <script src="snake.js"></script>
 </body>
+<footer>
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <div style="text-align: center;">
+        <a href="https://zzzkevinw.github.io/Web_Minesweeper/" class="footer-button" target="_blank">扫雷</a>
+    </div>
+    <p id = "author">@zzZkevinw</p>
+    <p id = "version">@Version 1.0</p>
+</footer>
 </html>

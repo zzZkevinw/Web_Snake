@@ -4,24 +4,42 @@ body {
     background-size: cover;
 }
 
-.controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.speed-controls,
-.size-controls {
-    display: flex;
-    align-items: center;
-}
-
 .gameCanvas {
     display: block;
     margin: 0 auto;
+    background-color: #f2f2f2; /* 棋盘背景颜色 */
+    border: 3px solid gold; /* 外边框 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* 阴影效果 */
 }
 
+#scoreBoard {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center; /* 让文本居中 */
+    border: 2px solid #444;
+    transition-duration: 0.4s;
+    cursor: default;
+    margin: 10px auto; /* 上下设置10px的外边距，并且自动设置左右外边距 */
+    width: 100px;
+}
+.sstyle {
+    font-size: 20px; /* 设置字体大小 */
+    font-weight: bold; /* 设置字体粗细 */
+    color: #000; /* 设置字体颜色 */
+    background: linear-gradient(to right, #f9f9f9, #e0e0e0); /* 渐变背景色 */
+    padding: 5px; /* 设置内边距 */
+    border-radius: 5px; /* 设置边框圆角 */
+    text-align: center; /* 设置文本对齐方式 */
+    border: 2px solid #444; /* 边框 */
+    transition-duration: 0.4s; /* 设置过渡效果 */
+    cursor: default; /*设置鼠标样式 */
+    margin: 0 10px; /* 设置按钮间距 */
+    width: 100px; /* 设置宽度 */
+}
 button {
     font-size: 20px; /* 设置字体大小 */
     font-weight: bold; /* 设置字体粗细 */
@@ -37,11 +55,6 @@ button {
     width: 100px; /* 设置宽度 */
 }
 
-.speed-controls label,
-.size-controls label {
-    margin-right: 5px;
-}
-
 .button-container {
     display: flex; /* 设置为 flex 容器 */
     justify-content: center; /* 水平居中对齐 */
@@ -51,4 +64,41 @@ button:hover {
     background: linear-gradient(to right, #636060, #777676); /* 鼠标悬停时的渐变背景色 */
 }
 
-/* 其他样式保持不变 */
+#instructionsButton {
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    width:100px;
+    /* 其他样式... */
+}
+
+#instructions {
+    text-align:justify;
+    width: 200px;
+    height: 550px;
+    position: absolute;
+    top: 60px; 
+    right: 10px;
+    display: none;
+    border: 2px solid #ccc; /* 边框样式 */
+    padding: 5px; /* 边框内边距 */
+    background-color: #f2f2f2; /* 背景色 */
+    overflow-y: auto; /* 添加滚动条 */
+}
+
+footer #author{
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    font-size: 20px;
+    color: #888;
+    left: 0;
+}
+
+footer #version{
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    font-size: 20px;
+    color: #888;
+}
