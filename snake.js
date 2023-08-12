@@ -176,6 +176,16 @@ document.addEventListener("keydown", (event) => {
 
 
 function startGame() {
+    // 检查是否选择了自定义大小但没有输入值
+    if (document.getElementById('customSize').checked && !document.getElementById('customSizeValue').value) {
+        alert("请在自定义大小框中输入一个值!");
+        return; // 不开始游戏，直接返回
+    }
+    // 检查是否选择了自定义速度但没有输入值
+    if (document.getElementById('customSpeed').checked && !document.getElementById('customSpeedValue').value) {
+        alert("请在自定义速度框中输入一个值!");
+        return; // 不开始游戏，直接返回
+    }
     if (gameLoop) {
         clearInterval(gameLoop);
     }
@@ -191,19 +201,54 @@ function startGame() {
     gameLoop = setInterval(update, SNAKE_SPEED);
     drawGrid();
 }
+document.getElementById('customSpeed').addEventListener('change', function() {
+    document.getElementById('customSpeedValue').style.display = 'inline';
+    SNAKE_SPEED = document.getElementById('customSpeedValue').value / SMOOTH_FACTOR; // 使用自定义速度值
+});
+
+document.getElementById('customSpeedValue').addEventListener('input', function(event) {
+    if (document.getElementById('customSpeed').checked) { // 只有在自定义速度选项被选中时才更新速度
+        SNAKE_SPEED = event.target.value / SMOOTH_FACTOR;
+    }
+});
 
 document.getElementsByName('speed').forEach(radio => {
     radio.addEventListener('change', (event) => {
-        SNAKE_SPEED = event.target.value / SMOOTH_FACTOR;
+        if (event.target.value !== 'custom') {
+            // document.getElementById('customSpeedValue').style.display = 'none';
+            SNAKE_SPEED = event.target.value / SMOOTH_FACTOR; // 使用选中的速度值
+        }
     });
+});
+
+document.getElementById('customSizeValue').addEventListener('input', function(event) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+document.getElementById('customSpeedValue').addEventListener('input', function(event) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+document.getElementById('customSize').addEventListener('change', function() {
+    document.getElementById('customSizeValue').style.display = 'inline';
+    setBoardSize(document.getElementById('customSizeValue').value); // 使用自定义大小值
+});
+
+document.getElementById('customSizeValue').addEventListener('input', function(event) {
+    if (document.getElementById('customSize').checked) { // 只有在自定义大小选项被选中时才更新大小
+        setBoardSize(event.target.value);
+    }
 });
 
 document.getElementsByName('size').forEach(radio => {
     radio.addEventListener('change', (event) => {
-        setBoardSize(event.target.value);
-        drawGrid(); // 重新绘制网格以匹配新大小
+        if (event.target.value !== 'custom') {
+            // document.getElementById('customSizeValue').style.display = 'none';
+            setBoardSize(event.target.value); // 使用选中的大小值
+        }
     });
 });
+
 
 window.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
