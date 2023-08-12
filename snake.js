@@ -1,6 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const BLOCK_SIZE = 20; // 这里保持 BLOCK_SIZE 为常量
+const BLOCK_SIZE = 10; // 这里保持 BLOCK_SIZE 为常量
 const SMOOTH_FACTOR = 5; // 平滑因子，控制每次更新移动的距离
 let SNAKE_SPEED = 250 / SMOOTH_FACTOR; // 更新速度
 let snakeX = canvas.width / 2 - BLOCK_SIZE / 2;
@@ -158,6 +158,10 @@ function checkCollision() {
 }
 
 document.addEventListener("keydown", (event) => {
+    if (event.key === ' ') {
+        startGame(); // 当按下空格键时，开始或重新开始游戏
+        return; // 返回，以防止进一步处理此事件
+    }
     if (changeDirection) return; // 如果方向已经改变，则忽略此次按键事件
 
     let newDirection = null;
@@ -251,7 +255,7 @@ document.getElementsByName('size').forEach(radio => {
 
 
 window.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === ' ') {
         event.preventDefault(); // 阻止默认的滚动行为
     }
 });
