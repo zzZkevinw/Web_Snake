@@ -1,7 +1,8 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const BLOCK_SIZE = 20; // 这里保持 BLOCK_SIZE 为常量
-let SNAKE_SPEED = 250;
+const SMOOTH_FACTOR = 5; // 平滑因子，控制每次更新移动的距离
+let SNAKE_SPEED = 250 / SMOOTH_FACTOR; // 更新速度
 let snakeX = canvas.width / 2 - BLOCK_SIZE / 2;
 let snakeY = canvas.height / 2 - BLOCK_SIZE / 2;
 let snakeXChange = BLOCK_SIZE;
@@ -12,6 +13,9 @@ let foodY;
 let score = 0;
 let gameLoop;
 let changeDirection = false; // 用于跟踪方向是否已经改变
+
+let nextDirection = null; // 在全局范围内定义
+
 
 function setBoardSize(size) {
     canvas.width = size;
@@ -79,16 +83,42 @@ function updateScore() {
     document.getElementById("scoreBoard").innerText = "Score: " + score;
 }
 
+const GROWTH_FACTOR = 4; // 每次吃掉食物后增长的长度
 function update() {
     const totalBlocks = (canvas.width / BLOCK_SIZE) * (canvas.height / BLOCK_SIZE); // 计算屏幕上的总区块数
 
-    snakeX += snakeXChange;
-    snakeY += snakeYChange;
+    // 检查蛇头是否与网格完全对齐
+    if (snakeX % BLOCK_SIZE === 0 && snakeY % BLOCK_SIZE === 0 && nextDirection) {
+        snakeXChange = nextDirection.x;
+        snakeYChange = nextDirection.y;
+        nextDirection = null; // 清除下一个方向
+    }
 
-    if (snakeX === foodX && snakeY === foodY) {
+    snakeX += snakeXChange / SMOOTH_FACTOR;
+    snakeY += snakeYChange / SMOOTH_FACTOR;
+
+    // 检查蛇头是否与墙壁有交集
+    if (snakeX < 0 || snakeX + BLOCK_SIZE > canvas.width ||
+        snakeY < 0 || snakeY + BLOCK_SIZE > canvas.height ||
+        checkCollision()) {
+        clearInterval(gameLoop);
+        alert("Game Over! Your Score: " + score);
+        document.getElementById('startBtn').disabled = false;
+        return;
+    }
+    // 检查蛇头是否与食物有交集
+    if (snakeX < foodX + BLOCK_SIZE &&
+        snakeX + BLOCK_SIZE > foodX &&
+        snakeY < foodY + BLOCK_SIZE &&
+        snakeY + BLOCK_SIZE > foodY) {
         score += 10;
         updateScore(); // 更新分数
         generateFood();
+
+        // 增加 GROWTH_FACTOR 个块到蛇的身体
+        for (let i = 0; i < GROWTH_FACTOR; i++) {
+            snakeBody.push({}); // 添加空对象，长度会在后续逻辑中更新
+        }
     } else {
         snakeBody.pop();
     }
@@ -116,6 +146,8 @@ function update() {
 }
 
 
+
+
 function checkCollision() {
     for (let i = 1; i < snakeBody.length; i++) {
         if (snakeX === snakeBody[i].x && snakeY === snakeBody[i].y) {
@@ -128,13 +160,19 @@ function checkCollision() {
 document.addEventListener("keydown", (event) => {
     if (changeDirection) return; // 如果方向已经改变，则忽略此次按键事件
 
-    if (event.key === "ArrowLeft" && snakeXChange !== BLOCK_SIZE) snakeXChange = -BLOCK_SIZE, snakeYChange = 0;
-    if (event.key === "ArrowRight" && snakeXChange !== -BLOCK_SIZE) snakeXChange = BLOCK_SIZE, snakeYChange = 0;
-    if (event.key === "ArrowUp" && snakeYChange !== BLOCK_SIZE) snakeYChange = -BLOCK_SIZE, snakeXChange = 0;
-    if (event.key === "ArrowDown" && snakeYChange !== -BLOCK_SIZE) snakeYChange = BLOCK_SIZE, snakeXChange = 0;
+    let newDirection = null;
+    if (event.key === "ArrowLeft" && snakeXChange !== BLOCK_SIZE) newDirection = { x: -BLOCK_SIZE, y: 0 };
+    if (event.key === "ArrowRight" && snakeXChange !== -BLOCK_SIZE) newDirection = { x: BLOCK_SIZE, y: 0 };
+    if (event.key === "ArrowUp" && snakeYChange !== BLOCK_SIZE) newDirection = { x: 0, y: -BLOCK_SIZE };
+    if (event.key === "ArrowDown" && snakeYChange !== -BLOCK_SIZE) newDirection = { x: 0, y: BLOCK_SIZE };
+
+    if (newDirection) {
+        nextDirection = newDirection;
+    }
 
     changeDirection = true; // 标记方向已经改变
 });
+
 
 
 function startGame() {
@@ -156,7 +194,7 @@ function startGame() {
 
 document.getElementsByName('speed').forEach(radio => {
     radio.addEventListener('change', (event) => {
-        SNAKE_SPEED = event.target.value;
+        SNAKE_SPEED = event.target.value / SMOOTH_FACTOR;
     });
 });
 
