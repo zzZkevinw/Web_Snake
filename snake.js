@@ -165,10 +165,10 @@ document.addEventListener("keydown", (event) => {
     if (changeDirection) return; // 如果方向已经改变，则忽略此次按键事件
 
     let newDirection = null;
-    if (event.key === "ArrowLeft" && snakeXChange !== BLOCK_SIZE) newDirection = { x: -BLOCK_SIZE, y: 0 };
-    if (event.key === "ArrowRight" && snakeXChange !== -BLOCK_SIZE) newDirection = { x: BLOCK_SIZE, y: 0 };
-    if (event.key === "ArrowUp" && snakeYChange !== BLOCK_SIZE) newDirection = { x: 0, y: -BLOCK_SIZE };
-    if (event.key === "ArrowDown" && snakeYChange !== -BLOCK_SIZE) newDirection = { x: 0, y: BLOCK_SIZE };
+    if ((event.key === "ArrowLeft" || event.key === "a") && snakeXChange !== BLOCK_SIZE) newDirection = { x: -BLOCK_SIZE, y: 0 };
+    if ((event.key === "ArrowRight" || event.key === "d") && snakeXChange !== -BLOCK_SIZE) newDirection = { x: BLOCK_SIZE, y: 0 };
+    if ((event.key === "ArrowUp" || event.key === "w") && snakeYChange !== BLOCK_SIZE) newDirection = { x: 0, y: -BLOCK_SIZE };
+    if ((event.key === "ArrowDown" || event.key === "s") && snakeYChange !== -BLOCK_SIZE) newDirection = { x: 0, y: BLOCK_SIZE };
 
     if (newDirection) {
         nextDirection = newDirection;
